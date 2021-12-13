@@ -23,5 +23,9 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
     "socket.io": "^4.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idanvidra/YesAndAdventure.git"
   }
 }
