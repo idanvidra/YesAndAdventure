@@ -75,12 +75,14 @@ app.use("/api/adventuretime", users);
 // route for message (middleware)
 const message = require("./routes/messageRoutes");
 const e = require("express");
+const exp = require("constants");
 app.use("/api/adventuretime", message);
 
 // deployment
 app.get("/", (req, res) => {
     res.sendFile(process.cwd() + "/my-app/dist/adventure-time");
 });
+app.use(express.static(process.cwd() + "/my-app/dist/adventure-time/"));
 
 // use express server to listen on port 3000
 const port = process.env.PORT || 3000;
