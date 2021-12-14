@@ -80,7 +80,7 @@ app.use("/api/adventuretime", message);
 
 // deployment
 app.get("/", (req, res) => {
-    res.sendFile(process.cwd() + "/my-app/dist/adventure-time");
+    res.sendFile(process.cwd() + "/my-app/dist/adventure-time/index.html");
 });
 app.use(express.static(process.cwd() + "/my-app/dist/adventure-time/"));
 
