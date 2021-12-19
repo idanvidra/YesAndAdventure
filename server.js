@@ -55,7 +55,10 @@ app.use(logger("dev"));
 
 // connect to DB
 mongoose.Promise = global.Promise;
-mongoose.connect(dbConfig.urlForDB);
+
+if(dbConfig && dbConfig.urlForDB) {
+    mongoose.connect(dbConfig.urlForDB);
+}
 
 // pass socket.io const to socket/streams.js
 require("./socket/streams")(io);
@@ -80,9 +83,9 @@ app.use("/api/adventuretime", message);
 
 // deployment
 app.get("/", (req, res) => {
-    res.sendFile(process.cwd() + "/my-app/dist/adventure-time/index.html");
+    res.sendFile(path.join(__dirname, 'my-app/dist/adventure-time/index.html'));
 });
-app.use(express.static(process.cwd() + "/my-app/dist/adventure-time/"));
+app.use(express.static(path.join(__dirname, 'my-app/dist/adventure-time/')));
 
 // use express server to listen on port 3000
 const port = process.env.PORT || 3000;
