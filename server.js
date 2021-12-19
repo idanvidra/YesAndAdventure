@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
-
+const path = require('path');
 const app = express();
 
 // CORS is a node.js package for providing a Connect/Express middleware
