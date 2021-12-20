@@ -86,9 +86,8 @@ app.use(express.static(path.join(__dirname, "adventure-time/")));
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "adventure-time/index.html"));
 });
-
 app.get("/register", (req, res) => {
-    res.sendFile("my-app/src/app/components/signup.component.html");
+    res.sendFile(path.join(__dirname, "adventure-time/index.html"));
 });
 
 // use express server to listen on port 3000
