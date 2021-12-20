@@ -82,6 +82,7 @@ const exp = require("constants");
 app.use("/api/adventuretime", message);
 
 // deployment
+console.log(__dirname);
 app.use(express.static(path.join(__dirname, "adventure-time/")));
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "adventure-time/index.html"));
