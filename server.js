@@ -82,14 +82,13 @@ const exp = require("constants");
 app.use("/api/adventuretime", message);
 
 // deployment
-console.log(__dirname);
-app.use(express.static(path.join(__dirname, "adventure-time/")));
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "adventure-time/index.html"));
-});
-app.get("/register", (req, res) => {
-    res.sendFile(path.join(__dirname, "adventure-time/index.html"));
-});
+// app.use(express.static(path.join(__dirname, "adventure-time/")));
+// app.get("/", (req, res) => {
+//     res.sendFile(path.join(__dirname, "adventure-time/index.html"));
+// });
+// app.get("/register", (req, res) => {
+//     res.sendFile(path.join(__dirname, "adventure-time/index.html"));
+// });
 
 // use express server to listen on port 3000
 const port = process.env.PORT || 3000;
