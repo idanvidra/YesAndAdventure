@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
-const path = require('path');
+const path = require("path");
 const app = express();
 
 // CORS is a node.js package for providing a Connect/Express middleware
@@ -56,7 +56,7 @@ app.use(logger("dev"));
 // connect to DB
 mongoose.Promise = global.Promise;
 
-if(dbConfig && dbConfig.urlForDB) {
+if (dbConfig && dbConfig.urlForDB) {
     mongoose.connect(dbConfig.urlForDB);
 }
 
@@ -82,9 +82,13 @@ const exp = require("constants");
 app.use("/api/adventuretime", message);
 
 // deployment
-app.use(express.static(path.join(__dirname, 'adventure-time/')));
+app.use(express.static(path.join(__dirname, "adventure-time/")));
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, 'adventure-time/index.html'));
+    res.sendFile(path.join(__dirname, "adventure-time/index.html"));
+});
+
+app.get("/register", (req, res) => {
+    res.sendFile("my-app/src/app/components/signup.component.html");
 });
 
 // use express server to listen on port 3000
