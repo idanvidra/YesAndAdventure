@@ -1,0 +1,25 @@
+<ul class="collection col s12 m12 l10" *ngFor="let game of games">
+  <li class="collection-item">
+    <span class="title">{{game['nickname']}}</span>
+    <p class="time">{{TimeFromNow(game['created'])}}</p>
+  </li>
+  <div class="row">
+    <div class="col s12">
+      <div calss="card">
+        <div class="card-content">
+          <p> {{game['game']}}</p>
+        </div>
+        <!-- <div class="card-action">
+          <i class="material-icons">thumb_up</i>
+          <span class="iconSpan">
+            10
+          </span>
+          <i class="material-icons">chat</i>
+          <span class="iconSpan">
+            10
+          </span>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</ul>

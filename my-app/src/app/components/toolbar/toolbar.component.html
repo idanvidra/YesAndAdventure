@@ -1,0 +1,50 @@
+<nav class="nav-extended">
+  <div class="container">
+    <div class="nav-wrapper">
+      <a (click)="GoToHome()" class="brand-logo">Adventure Time</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+        <li class="dropdown-button dropdown-trigger1" data-target="dropdown1">
+          <i class="fa fa-bell fa-1x badge"></i>
+          <span class="nav-label-icon circle" *ngIf="count.length > 0">{{count.length}}</span>
+          <ul id='dropdown1' class='dropdown-content col s12 collection'>
+            <li class="collection-item avatar" *ngFor="let chat of chatList">
+              <span class="title">
+                {{chat['receiverId']['nickname']}}
+                <a class="secondary-content">
+                  {{ MessageDate(chat['msgId']['message'][chat['msgId']['message']['length'] - 1]['createdAt'])}}
+                  <!-- {{ typeof chat['msgId']['message']}} -->
+                </a>
+              </span>
+              <p>
+                {{chat['msgId']['message'][chat['msgId']['message']['length'] - 1]['body']}}
+              </p>
+              <a class="secondary-content">
+                <i class="material-icons">brightness_1</i>
+              </a>
+              <a class="secondary-content">
+                <i class="material-icons">panorama_fish_eye</i>
+              </a>
+            </li>
+            <li *ngIf="notifcations.length <= 0">
+              <p class="text">No Notification</p>
+            </li>
+            <p class="secondary-content">
+              <!-- <a class="markAll btn" (click)="MarkAllMessages()">Mark All As Read</a> -->
+            </p>
+          </ul>
+        </li>
+        <li>
+          <a (click)="logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav-content">
+      <div class="nav-div">
+        <img class="circle responsive-img" src="http://placehold.it/50x50">
+      </div>
+      <h1 class="profile-name">{{user.nickname}}</h1>
+      <p class="user-text">Welcome to your adventure</p>
+    </div>
+  </div>
+</nav>
