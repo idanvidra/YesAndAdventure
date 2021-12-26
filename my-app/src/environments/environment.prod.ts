@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiHost: "/api/adventuretime"
+  apiHost: "/api/adventuretime",
+  socket: ""
 };

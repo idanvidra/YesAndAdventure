@@ -4,6 +4,9 @@ import { MessageService } from 'src/app/services/message.service';
 import { TokenService } from 'src/app/services/token.service';
 import { UsersService } from 'src/app/services/users.service';
 import io from 'socket.io-client';
+import { environment } from 'src/environments/environment';
+
+const BASESOCKET = environment.socket;
 
 @Component({
   selector: 'app-message',
@@ -29,7 +32,7 @@ export class MessageComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private usersService: UsersService
   ) {
-    this.socketHost = 'http://localhost:3000';
+    this.socketHost = BASESOCKET;
     this.socket = io(this.socketHost, {transports: ['websocket']});
   }
 

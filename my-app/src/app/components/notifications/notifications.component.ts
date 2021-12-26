@@ -3,6 +3,9 @@ import { TokenService } from 'src/app/services/token.service';
 import { UsersService } from 'src/app/services/users.service';
 import io from 'socket.io-client'
 import * as moment from 'moment';
+import { environment } from 'src/environments/environment';
+
+const BASESOCKET = environment.socket;
 
 @Component({
   selector: 'app-notifications',
@@ -17,7 +20,7 @@ export class NotificationsComponent implements OnInit {
   notifications = [];
 
   constructor(private tokenService: TokenService, private usersService: UsersService) {
-    this.socketHost = 'http://localhost:3000';
+    this.socketHost = BASESOCKET;
     this.socket = io(this.socketHost, {transports: ['websocket']});
    }
 

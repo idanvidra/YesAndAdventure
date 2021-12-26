@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GamesService } from 'src/app/services/games.service';
 import io from 'socket.io-client';
+import { environment } from 'src/environments/environment';
+
+const BASESOCKET = environment.socket;
 
 @Component({
   selector: 'app-game-form',
@@ -15,7 +18,7 @@ export class GameFormComponent implements OnInit {
   gameForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private gameService: GamesService) {
-    this.socketHost = 'http://localhost:3000';
+    this.socketHost = BASESOCKET;
     this.socket = io(this.socketHost, {transports: ['websocket']});
   }
 
