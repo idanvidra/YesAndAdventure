@@ -5,6 +5,9 @@ import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import io from 'socket.io-client';
+import { environment } from 'src/environments/environment';
+
+const BASESOCKET = environment.socket;
 
 @Component({
   selector: 'app-games',
@@ -17,7 +20,7 @@ export class GamesComponent implements OnInit {
   socket: any; // emit any event we want
 
   constructor(private gamesService: GamesService, private tokenService: TokenService, private router: Router,) {
-    this.socketHost = 'http://localhost:3000';
+    this.socketHost = BASESOCKET;
     this.socket = io(this.socketHost, {transports: ['websocket']});
   }
 
