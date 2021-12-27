@@ -31,6 +31,7 @@ export class GamesComponent implements OnInit {
     // 1. client side game-form.component emits refresh event when game is posted
     // 2. server side listens to refresh event and sends refreshPage event to all clients
     // 3. client side listens to refreshPage event and recollects all games from server
+    
     // this.socket.on("refreshPage", (data: any) => {
     //   this.AllGames();
     // })
