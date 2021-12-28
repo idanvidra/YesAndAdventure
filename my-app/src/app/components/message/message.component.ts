@@ -38,9 +38,18 @@ export class MessageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.user = this.tokenService.GetPayload();
+    
+    console.log("user")
+    console.log(this.user);
+
     this.route.params.subscribe(params => {
       this.reciever = params.nickname;
       this.GetUserByNickname(this.reciever);
+
+      console.log("reciever")
+      console.log(this.reciever)
+      console.log("get user by nickname")
+      console.log(this.GetUserByNickname(this.reciever))
 
       // listens to emitions of refreshPage and runs GetUserByNickname
       // this will run GetMessages
@@ -91,6 +100,10 @@ export class MessageComponent implements OnInit, AfterViewInit {
 
   SendMessage() {
     if (this.message) { // no messages if empty
+
+      console.log("message content")
+      console.log(this.message)
+
       this.messageService
       .SendMessage(this.user._id, this.recieverData._id, this.recieverData.nickname, this.message)
       .subscribe(data => {
