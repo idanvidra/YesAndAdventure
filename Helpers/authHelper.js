@@ -15,11 +15,11 @@ if (process.env.DB) {
 // are accessing the routes
 module.exports = {
     VerifyToken: (req, res, next) => {
-        if (!req.headers.authorization) {
-            return res
-                .status(HttpStatus.StatusCodes.UNAUTHORIZED)
-                .json({ message: "No authorization" });
-        }
+        // if (!req.headers.authorization) {
+        //     return res
+        //         .status(HttpStatus.StatusCodes.UNAUTHORIZED)
+        //         .json({ message: "No authorization" });
+        // }
         const token =
             req.cookies.auth || req.headers.authorization.split(" ")[1];
 
