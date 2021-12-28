@@ -38,9 +38,6 @@ export class MessageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.user = this.tokenService.GetPayload();
-    
-    console.log("user")
-    console.log(this.user);
 
     this.route.params.subscribe(params => {
       this.reciever = params.nickname;
@@ -81,9 +78,6 @@ export class MessageComponent implements OnInit, AfterViewInit {
   GetUserByNickname(name:any) {
     this.usersService.GetUserByNickname(name).subscribe(data => {
       this.recieverData = data.result;
-
-      console.log("recieverData")
-      console.log(this.recieverData)
       
       // we call the GetMessages function here out of convenience 
       this.GetMessages(this.user._id, data.result._id)
@@ -93,26 +87,17 @@ export class MessageComponent implements OnInit, AfterViewInit {
   GetMessages(senderId:any, recieverId:any) {
     this.messageService.GetAllMessages(senderId, recieverId).subscribe(data => {
 
-      console.log("data from Get Messages")
-      console.log(data)
-
       this.messagesArray = data.messages.message;
     })
   }
 
   SendMessage() {
-    console.log("send message before anything")
 
     if (this.message) { // no messages if empty
-
-      console.log("message not empty")
 
       this.messageService
       .SendMessage(this.user._id, this.recieverData._id, this.recieverData.nickname, this.message)
         .subscribe(data => {
-
-          console.log("data from send message")
-          console.log(data)
 
         this.message = "" // make field empty after sending
         this.socket.emit('refresh', {}) // emit refresh event when message is sent

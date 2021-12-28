@@ -95,7 +95,6 @@ module.exports = {
                                 .json({ message: "failed to send message" })
                         );
                 } else {
-                    // console.log(result);
                     // first time they talked
                     const newConversation = new Conversation();
                     newConversation.participants.push({

@@ -52,7 +52,6 @@ export class ToolbarComponent implements OnInit {
   GetUser() {
     this.usersService.GetUserById(this.user._id).subscribe(data => {
       this.chatList = data.result.chatList;
-      console.log(this.chatList)
     }, err => {
       if (err.error.token == null) {
         this.tokenService.DeleteToken();
