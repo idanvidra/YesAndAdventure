@@ -4,7 +4,7 @@
       <a (click)="GoToHome()" class="brand-logo">Adventure Time</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
 
-        <li class="dropdown-button dropdown-trigger1" data-target="dropdown1">
+        <!-- <li class="dropdown-button dropdown-trigger1" data-target="dropdown1">
           <i class="fa fa-bell fa-1x badge"></i>
           <span class="nav-label-icon circle" *ngIf="count.length > 0">{{count.length}}</span>
           <ul id='dropdown1' class='dropdown-content col s12 collection'>
@@ -13,7 +13,6 @@
                 {{chat['receiverId']['nickname']}}
                 <a class="secondary-content">
                   {{ MessageDate(chat['msgId']['message'][chat['msgId']['message']['length'] - 1]['createdAt'])}}
-                  <!-- {{ typeof chat['msgId']['message']}} -->
                 </a>
               </span>
               <p>
@@ -30,10 +29,9 @@
               <p class="text">No Notification</p>
             </li>
             <p class="secondary-content">
-              <!-- <a class="markAll btn" (click)="MarkAllMessages()">Mark All As Read</a> -->
             </p>
           </ul>
-        </li>
+        </li> -->
         <li>
           <a (click)="logout()">Logout</a>
         </li>

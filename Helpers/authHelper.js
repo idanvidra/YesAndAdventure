@@ -15,6 +15,9 @@ if (process.env.DB) {
 // are accessing the routes
 module.exports = {
     VerifyToken: (req, res, next) => {
+        console.log("authHelper headers");
+        console.log(req.headers);
+
         if (!req.headers.authorization) {
             return res
                 .status(HttpStatus.StatusCodes.UNAUTHORIZED)
