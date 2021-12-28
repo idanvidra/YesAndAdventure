@@ -101,7 +101,12 @@ export class MessageComponent implements OnInit, AfterViewInit {
   }
 
   SendMessage() {
+    console.log("send message before anything")
+
     if (this.message) { // no messages if empty
+
+      console.log("message not empty")
+
       this.messageService
       .SendMessage(this.user._id, this.recieverData._id, this.recieverData.nickname, this.message)
         .subscribe(data => {
