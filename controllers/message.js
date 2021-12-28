@@ -109,6 +109,10 @@ module.exports = {
                     newMessage.conversationId = saveConversation._id;
                     newMessage.sender = req.user.nickname;
                     newMessage.receiver = req.body.receiverName;
+
+                    console.log("server side message nickname");
+                    console.log(req.user.nickname);
+
                     newMessage.message.push({
                         senderId: senderId,
                         receiverId: senderId,
@@ -116,6 +120,9 @@ module.exports = {
                         recieverName: req.body.receiverName,
                         body: req.body.message,
                     });
+
+                    console.log("after scary part");
+                    console.log(newMessage);
 
                     // update chat list array
                     // search by Id for the sender
