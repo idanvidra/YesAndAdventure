@@ -8,7 +8,7 @@ if (process.env.DB) {
         secretForAuthToken: process.env.SECRET,
     };
 } else {
-    dbconfig = require("../config/secrets");
+    dbConfig = require("../config/secrets");
 }
 
 // protect routes so only registered and logged in users
@@ -35,7 +35,7 @@ module.exports = {
         // verify the token
         return jwt.verify(
             token,
-            dbconfig.secretForAuthToken,
+            dbConfig.secretForAuthToken,
             (err, decoded) => {
                 if (err) {
                     if (err.expiredAt < new Date()) {
