@@ -63,6 +63,9 @@ if (dbConfig && dbConfig.urlForDB) {
 // pass socket.io const to socket/streams.js
 require("./socket/streams")(io);
 
+// pass socket.io const to socket/private.js
+require("./socket/private")(io);
+
 // route for authentication (middleware)
 const auth = require("./routes/authRoutes");
 app.use("/api/adventuretime", auth);
