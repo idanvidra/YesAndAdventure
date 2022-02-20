@@ -61,11 +61,8 @@
               <textarea name="message" [(ngModel)]="message" (keypress)="IsTyping()"
                 class="materialize-textarea inputBox"></textarea>
             </div>
-            <div class="input-field col s1 emojiDiv">
-              <button class="emojiBtn">Emoji</button>
-            </div>
             <div class="input-field col s1">
-              <button class="suffix btn">Send</button>
+              <button class="suffix btn" (keyup.enter)="SendMessage()">Send</button>
             </div>
           </form>
         </div>
