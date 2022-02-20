@@ -59,10 +59,10 @@
           <form (ngSubmit)="SendMessage()">
             <div class="input-field inputField col s10">
               <textarea name="message" [(ngModel)]="message" (keypress)="IsTyping()"
-                class="materialize-textarea inputBox"></textarea>
+                class="materialize-textarea inputBox" (keydown.enter)="SendMessage()"></textarea>
             </div>
             <div class="input-field col s1">
-              <button class="suffix btn" (keyup.enter)="SendMessage()">Send</button>
+              <button class="suffix btn">Send</button>
             </div>
           </form>
         </div>
