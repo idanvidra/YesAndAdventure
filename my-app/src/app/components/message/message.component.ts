@@ -5,6 +5,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { UsersService } from 'src/app/services/users.service';
 import io from 'socket.io-client';
 import { environment } from 'src/environments/environment';
+// import { HelperService } from 'src/app/services/helper.service';
 
 const BASESOCKET = environment.socket;
 
@@ -30,7 +31,9 @@ export class MessageComponent implements OnInit, AfterViewInit {
     private tokenService: TokenService,
     private messageService: MessageService,
     private route: ActivatedRoute,
-    private usersService: UsersService
+    private usersService: UsersService,
+
+    // private helperService: HelperService
   ) {
     this.socketHost = BASESOCKET;
     this.socket = io(this.socketHost, {transports: ['websocket']});
@@ -128,5 +131,7 @@ export class MessageComponent implements OnInit, AfterViewInit {
     }, 500)
   }
 
+  
 
 }
+
