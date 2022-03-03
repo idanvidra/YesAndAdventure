@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { MessageService } from 'src/app/services/message.service';
@@ -6,6 +6,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { UsersService } from 'src/app/services/users.service';
 import io from 'socket.io-client';
 import { environment } from 'src/environments/environment';
+// import { EventEmitter } from 'stream';
 
 const BASESOCKET = environment.socket;
 
@@ -15,8 +16,13 @@ const BASESOCKET = environment.socket;
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent implements OnInit, AfterViewInit {
-  user: any;
+  // output decorator - will be used to communicate between parent and child components
+  // toolbar -> chat -> message components
+  // output decorator used to send from child to parent component
+  // input decorator used to send from parent to child component
+  @Output() onlineUsers = new EventEmitter();
 
+  user: any;
   notifcations = [];
   socketHost: any; // localhost:3000 -> path to node.js application
   socket: any; // emit any event we want
@@ -62,7 +68,10 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.socket.on('usersOnline', (data: any) => {
-        console.log(data)
+      // transfer data to child components
+      // this is a different emit from the socket.io emit
+      // this is an event emmiter 
+      this.onlineUsers.emit(data);
       })
   }
 
