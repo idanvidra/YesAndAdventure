@@ -14,7 +14,7 @@ const routes: Routes = [
     RouterModule
   ],
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, { useHash: true })
   ]
 })
 export class AuthRoutingModule { }
