@@ -17,6 +17,7 @@ import { ChatComponent } from '../components/chat/chat.component';
 import { MessageComponent } from '../components/message/message.component';
 import { MessageService } from '../services/message.service';
 import { NgxAutoScrollModule } from "ngx-auto-scroll";
+import { RandomgameComponent } from '../components/randomgame/randomgame.component';
 
 
 
@@ -31,6 +32,7 @@ import { NgxAutoScrollModule } from "ngx-auto-scroll";
     NotificationsComponent,
     ChatComponent,
     MessageComponent,
+    RandomgameComponent
   ],
   imports: [
     CommonModule,
