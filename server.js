@@ -62,12 +62,16 @@ if (dbConfig && dbConfig.urlForDB) {
 }
 
 const { User } = require("./Helpers/UserClass");
+const { Player } = require("./Helpers/PlayerClass");
 
 // pass socket.io const to socket/streams.js
 require("./socket/streams")(io, User, _);
 
 // pass socket.io const to socket/private.js
 require("./socket/private")(io);
+
+// pass socket.io const to socket/matchmaking.js
+require("./socket/matchmaking")(io, Player, _);
 
 // route for authentication (middleware)
 const auth = require("./routes/authRoutes");
