@@ -12,17 +12,28 @@ class Player {
     EnterRoom(id, nickname, room) {
         // shorthand user object creation
         const user = { id, nickname, room };
-        this.globalArray.push(user);
+        if (
+            this.globalArray.filter((e) => e.nickname === user.nickname)
+                .length > 0
+        ) {
+            console.log("player already in queue");
+        } else {
+            this.globalArray.push(user);
+        }
+        console.log(this.globalArray);
         return user;
     }
 
     // input: user id
     // ouput: socket id for the user
     GetUserId(id) {
+        console.log("given id: " + id);
+        console.log("global array: " + this.globalArray);
         // filter through array and return filter
         const socketId = this.globalArray.filter(
             (userId) => userId.id === id
         )[0];
+        console.log("socketId: " + socketId);
         return socketId;
     }
 
