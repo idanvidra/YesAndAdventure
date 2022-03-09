@@ -106,7 +106,7 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
     this.socket.emit('join chat', params);
 
     // remove user from ready_to_play queue
-    this.socket.emit('already_playing')
+    this.socket.emit('already_playing', this.user.nickname)
   }
 
   GetUserByNickname(name:any) {
