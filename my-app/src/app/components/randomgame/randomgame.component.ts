@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { TokenService } from 'src/app/services/token.service';
 import { UsersService } from 'src/app/services/users.service';
 import { ActivatedRoute } from '@angular/router';
-import io from 'socket.io-client';
 import { environment } from 'src/environments/environment';
+import io from 'socket.io-client';
+import * as _ from 'lodash';
+
 
 const BASESOCKET = environment.socket;
 
@@ -46,8 +48,17 @@ export class RandomgameComponent implements OnInit {
     
     // check the use of rooms - like in typing indicator
     this.socket.on("matchmaking", (twoPlayers: any) => {
-      console.log("two players 2")
-      console.log(twoPlayers)
+      // check if connected user is searching matched
+      if (twoPlayers.includes(this.nickname)) {
+        // filter out the other player
+        const otherPlayer = twoPlayers.filter((e: any) => { return e !== this.nickname })
+        // different redirects depending on enviroment
+        if (environment.production) {
+          window.location.href = "https://yes-and-adventure.azurewebsites.net/#/chat/" + otherPlayer;
+        } else {
+          window.location.href = "http://localhost:4200/#/chat/" + otherPlayer;
+        }
+      }
     })
   }
 
