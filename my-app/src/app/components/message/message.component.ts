@@ -62,7 +62,7 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
     })
 
     // get the input property from chat component to check which users are online
-
+    console.log(this.reciever)
 
     // check the emition of is typing event - when the partner is typing
     this.socket.on('is_typing', (data: any) => {

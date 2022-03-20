@@ -16,11 +16,21 @@ module.exports = function (io, Player, _) {
             const list = playerData.GetList(params.room);
             // emit the ready event
             io.emit("playersReadyToPlay", _.uniq(list));
-            // console.log(_.uniq(list));
             // check if there is more then one player ready
             if (_.uniq(list).length > 1) {
                 const firstTwoPlayersInQueue = _.uniq(list).slice(0, 2);
-                console.log("two players 1");
+                console.log(
+                    firstTwoPlayersInQueue[0],
+                    firstTwoPlayersInQueue[1]
+                );
+                // remove the matched players
+                const player_1 = playerData.RemoveUserByNickname(
+                    firstTwoPlayersInQueue[0]
+                );
+                const player_2 = playerData.RemoveUserByNickname(
+                    firstTwoPlayersInQueue[0]
+                );
+                // console.log("two players 1");
                 io.emit("matchmaking", firstTwoPlayersInQueue);
             }
         });

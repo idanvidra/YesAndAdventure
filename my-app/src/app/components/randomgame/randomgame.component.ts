@@ -40,12 +40,6 @@ export class RandomgameComponent implements OnInit {
       console.log(list)
     })
 
-
-    // for some reason doesn't fire on this event
-    // might be that doesn't listen when firing (since runs on init only)
-    // potential matchmaking solution: firing this event with two names attached
-    // then client side checks the names and then pop up and move to game
-    
     // check the use of rooms - like in typing indicator
     this.socket.on("matchmaking", (twoPlayers: any) => {
       // check if connected user is searching matched
