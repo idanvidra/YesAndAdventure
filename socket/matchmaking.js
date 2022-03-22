@@ -25,43 +25,43 @@ module.exports = function (io, Player, _) {
             // emit the ready event
             io.emit("playersReadyToPlay", _.uniq(list));
             // check if there is more then one player ready
-            if (_.uniq(list).length > 1) {
-                const firstTwoPlayersInQueue = _.uniq(list).slice(0, 2);
-                console.log(
-                    firstTwoPlayersInQueue[0],
-                    firstTwoPlayersInQueue[1]
-                );
-                // remove the matched players
-                const player_1 = playerData.RemoveUserByNickname(
-                    firstTwoPlayersInQueue[0]
-                );
-                const player_2 = playerData.RemoveUserByNickname(
-                    firstTwoPlayersInQueue[0]
-                );
-                // console.log("two players 1");
-                io.emit("matchmaking", firstTwoPlayersInQueue);
-            }
-
-            // function niceFetch(url) {
-            //     if (_.uniq(list).length > 1) {
-            //         const firstTwoPlayersInQueue = _.uniq(list).slice(0, 2);
-            //         console.log(
-            //             firstTwoPlayersInQueue[0],
-            //             firstTwoPlayersInQueue[1]
-            //         );
-            //         // remove the matched players
-            //         const player_1 = playerData.RemoveUserByNickname(
-            //             firstTwoPlayersInQueue[0]
-            //         );
-            //         const player_2 = playerData.RemoveUserByNickname(
-            //             firstTwoPlayersInQueue[0]
-            //         );
-            //         // console.log("two players 1");
-            //         io.emit("matchmaking", firstTwoPlayersInQueue);
-            //     }
-            //     return mutex.use(() => do_something());
+            // if (_.uniq(list).length > 1) {
+            //     const firstTwoPlayersInQueue = _.uniq(list).slice(0, 2);
+            //     console.log(
+            //         firstTwoPlayersInQueue[0],
+            //         firstTwoPlayersInQueue[1]
+            //     );
+            //     // remove the matched players
+            //     const player_1 = playerData.RemoveUserByNickname(
+            //         firstTwoPlayersInQueue[0]
+            //     );
+            //     const player_2 = playerData.RemoveUserByNickname(
+            //         firstTwoPlayersInQueue[0]
+            //     );
+            //     // console.log("two players 1");
+            //     io.emit("matchmaking", firstTwoPlayersInQueue);
             // }
-            // niceFetch();
+
+            function niceFetch(url) {
+                if (_.uniq(list).length > 1) {
+                    const firstTwoPlayersInQueue = _.uniq(list).slice(0, 2);
+                    console.log(
+                        firstTwoPlayersInQueue[0],
+                        firstTwoPlayersInQueue[1]
+                    );
+                    // remove the matched players
+                    const player_1 = playerData.RemoveUserByNickname(
+                        firstTwoPlayersInQueue[0]
+                    );
+                    const player_2 = playerData.RemoveUserByNickname(
+                        firstTwoPlayersInQueue[0]
+                    );
+                    // console.log("two players 1");
+                    io.emit("matchmaking", firstTwoPlayersInQueue);
+                }
+                return mutex.use(() => do_something());
+            }
+            niceFetch();
         });
 
         // listen for when ready to play player has joined game
