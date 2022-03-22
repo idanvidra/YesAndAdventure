@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, HostListener, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'src/app/services/message.service';
 import { TokenService } from 'src/app/services/token.service';
@@ -15,7 +15,7 @@ const BASESOCKET = environment.socket;
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.css']
 })
-export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
+export class MessageComponent implements OnInit, AfterViewInit, OnChanges{
   // output decorator used to send from child to parent component
   // input decorator used to send from parent to child component
   // send from message to chat component
@@ -40,7 +40,6 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
     private messageService: MessageService,
     private route: ActivatedRoute,
     private usersService: UsersService,
-
     // private helperService: HelperService
   ) {
     this.socketHost = BASESOCKET;
@@ -62,8 +61,6 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
     })
 
     // get the input property from chat component to check which users are online
-    console.log(this.reciever)
-
     // check the emition of is typing event - when the partner is typing
     this.socket.on('is_typing', (data: any) => {
       if (data.sender == this.reciever) {
@@ -78,6 +75,19 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
       }
     })
   }
+
+  // check for user leaving page
+
+  // add OnDestroy 
+  // saveDraft():Promise<string> {
+  //   //Return a promise so that ngOnDestroy will wait for it to finish
+  //   return "true"
+  // }
+
+  // @HostListener('window:beforeunload') //<-- Do NOT put a semicolon here
+  // async ngOnDestroy() {
+  //   await this.saveDraft();
+  // }
 
   // detect changes that are made in the component
   // returens the values
@@ -108,6 +118,8 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
     // remove user from ready_to_play queue
     this.socket.emit('already_playing', this.user.nickname)
   }
+
+  // check for when user leaves page
 
   GetUserByNickname(name:any) {
     this.usersService.GetUserByNickname(name).subscribe(data => {

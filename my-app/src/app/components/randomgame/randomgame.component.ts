@@ -61,7 +61,6 @@ export class RandomgameComponent implements OnInit {
       room: 'global', 
       nickname: this.nickname
     }
-    console.log(params);
     this.socket.emit('ready_to_play', params)
   }
 
