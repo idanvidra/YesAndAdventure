@@ -9,7 +9,7 @@ module.exports = function (io, Player, _) {
     async function do_something() {
         console.log("do something");
         return new Promise((resolve) => {
-            console.log("promise");
+            console.log("promise ");
         });
     }
 
