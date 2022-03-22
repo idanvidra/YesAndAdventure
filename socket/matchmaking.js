@@ -4,7 +4,7 @@
 const Mutex = require("await-semaphore");
 
 module.exports = function (io, Player, _) {
-    // var mutex = new Mutex.Mutex();
+    var mutex = new Mutex.Mutex();
     async function do_something() {
         console.log("do something");
         return new Promise((resolve) => {
