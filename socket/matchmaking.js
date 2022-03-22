@@ -1,7 +1,7 @@
 // to learn more about socket.io emits:
 // https://socket.io/docs/v3/emit-cheatsheet/
 
-// const Mutex = require("await-semaphore");
+const Mutex = require("await-semaphore");
 
 module.exports = function (io, Player, _) {
     // var mutex = new Mutex.Mutex();
