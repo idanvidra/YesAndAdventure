@@ -5,8 +5,21 @@ const Mutex = require("await-semaphore");
 
 module.exports = function (io, Player, _) {
     var mutex = new Mutex.Mutex();
-    async function do_something() {
+    async function do_something(list) {
         console.log("do something");
+        if (_.uniq(list).length > 1) {
+            const firstTwoPlayersInQueue = _.uniq(list).slice(0, 2);
+            console.log(firstTwoPlayersInQueue[0], firstTwoPlayersInQueue[1]);
+            // remove the matched players
+            const player_1 = playerData.RemoveUserByNickname(
+                firstTwoPlayersInQueue[0]
+            );
+            const player_2 = playerData.RemoveUserByNickname(
+                firstTwoPlayersInQueue[0]
+            );
+            // console.log("two players 1");
+            io.emit("matchmaking", firstTwoPlayersInQueue);
+        }
         return new Promise((resolve) => {
             console.log("promise");
         });
@@ -42,26 +55,10 @@ module.exports = function (io, Player, _) {
             //     io.emit("matchmaking", firstTwoPlayersInQueue);
             // }
 
-            function niceFetch(url) {
-                if (_.uniq(list).length > 1) {
-                    const firstTwoPlayersInQueue = _.uniq(list).slice(0, 2);
-                    console.log(
-                        firstTwoPlayersInQueue[0],
-                        firstTwoPlayersInQueue[1]
-                    );
-                    // remove the matched players
-                    const player_1 = playerData.RemoveUserByNickname(
-                        firstTwoPlayersInQueue[0]
-                    );
-                    const player_2 = playerData.RemoveUserByNickname(
-                        firstTwoPlayersInQueue[0]
-                    );
-                    // console.log("two players 1");
-                    io.emit("matchmaking", firstTwoPlayersInQueue);
-                }
-                return mutex.use(() => do_something());
+            function niceFetch(list) {
+                return mutex.use(() => do_something(list));
             }
-            niceFetch();
+            niceFetch(list);
         });
 
         // listen for when ready to play player has joined game
