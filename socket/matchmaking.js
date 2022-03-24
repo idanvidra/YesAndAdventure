@@ -5,9 +5,12 @@ const Mutex = require("await-semaphore");
 
 module.exports = function (io, Player, _) {
     var mutex = new Mutex.Mutex();
-    async function do_something(list) {
+    async function do_something(list, io) {
         console.log("do something");
+        console.log(_.uniq(list));
         if (_.uniq(list).length > 1) {
+            console.log("inside if");
+            console.log(list);
             const firstTwoPlayersInQueue = _.uniq(list).slice(0, 2);
             console.log(firstTwoPlayersInQueue[0], firstTwoPlayersInQueue[1]);
             // remove the matched players
@@ -38,27 +41,27 @@ module.exports = function (io, Player, _) {
             // emit the ready event
             io.emit("playersReadyToPlay", _.uniq(list));
             // check if there is more then one player ready
-            // if (_.uniq(list).length > 1) {
-            //     const firstTwoPlayersInQueue = _.uniq(list).slice(0, 2);
-            //     console.log(
-            //         firstTwoPlayersInQueue[0],
-            //         firstTwoPlayersInQueue[1]
-            //     );
-            //     // remove the matched players
-            //     const player_1 = playerData.RemoveUserByNickname(
-            //         firstTwoPlayersInQueue[0]
-            //     );
-            //     const player_2 = playerData.RemoveUserByNickname(
-            //         firstTwoPlayersInQueue[0]
-            //     );
-            //     // console.log("two players 1");
-            //     io.emit("matchmaking", firstTwoPlayersInQueue);
-            // }
-
-            function niceFetch(list) {
-                return mutex.use(() => do_something(list));
+            if (_.uniq(list).length > 1) {
+                const firstTwoPlayersInQueue = _.uniq(list).slice(0, 2);
+                console.log(
+                    firstTwoPlayersInQueue[0],
+                    firstTwoPlayersInQueue[1]
+                );
+                // remove the matched players
+                const player_1 = playerData.RemoveUserByNickname(
+                    firstTwoPlayersInQueue[0]
+                );
+                const player_2 = playerData.RemoveUserByNickname(
+                    firstTwoPlayersInQueue[0]
+                );
+                // console.log("two players 1");
+                io.emit("matchmaking", firstTwoPlayersInQueue);
             }
-            niceFetch(list);
+
+            // function niceFetch(list) {
+            //     return mutex.use(() => do_something(list, io));
+            // }
+            // niceFetch(list);
         });
 
         // listen for when ready to play player has joined game
