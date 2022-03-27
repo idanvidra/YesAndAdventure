@@ -33,6 +33,7 @@ module.exports = function (io, Player, _) {
             }, 300);
         });
     }
+    const lock = new Semaphore(1);
 
     // connection event is a global event
     io.on("connection", (socket) => {
@@ -61,8 +62,6 @@ module.exports = function (io, Player, _) {
             //     // console.log("two players 1");
             //     io.emit("matchmaking", firstTwoPlayersInQueue);
             // }
-
-            const lock = new Semaphore(1);
 
             async function critical() {
                 await lock.acquire();
