@@ -5,7 +5,7 @@ const Mutex = require("await-semaphore");
 
 module.exports = function (io, Player, _) {
     var mutex = new Mutex.Mutex();
-    async function do_something(io, playerData, socket, params) {
+    function do_something(io, playerData, socket, params) {
         // socket.join(params.room);
         playerData.EnterRoom(socket.id, params.nickname, params.room);
         // get list of nicknames of all ready to play players
