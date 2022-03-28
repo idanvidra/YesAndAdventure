@@ -70,8 +70,10 @@ require("./socket/streams")(io, User, _);
 // pass socket.io const to socket/private.js
 require("./socket/private")(io);
 
+const Semaphore = require("semaphore-async-await").Lock;
+const lock = new Semaphore(1);
 // pass socket.io const to socket/matchmaking.js
-require("./socket/matchmaking")(io, Player, _);
+require("./socket/matchmaking")(io, Player, _, lock);
 
 // route for authentication (middleware)
 const auth = require("./routes/authRoutes");

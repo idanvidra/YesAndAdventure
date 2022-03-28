@@ -1,10 +1,10 @@
 // to learn more about socket.io emits:
 // https://socket.io/docs/v3/emit-cheatsheet/
 
-const Semaphore = require("semaphore-async-await").Lock;
+// const Semaphore = require("semaphore-async-await").Lock;
 // import { Lock } from "semaphore-async-await";
 
-module.exports = function (io, Player, _) {
+module.exports = function (io, Player, _, lock) {
     const playerData = new Player();
     async function criticalFunc(socket, playerData, params, io) {
         return new Promise((resolve, reject) => {
@@ -33,7 +33,7 @@ module.exports = function (io, Player, _) {
             }, 300);
         });
     }
-    const lock = new Semaphore(1);
+    // const lock = new Semaphore(1);
 
     // connection event is a global event
     io.on("connection", (socket) => {
