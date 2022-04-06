@@ -51,10 +51,21 @@ require("./socket/streams")(io, User, _);
 // pass socket.io const to socket/private.js
 require("./socket/private")(io);
 
-// const Semaphore = require("semaphore-async-await").Lock;
-// const lock = new Semaphore(1);
+const async = require("async");
+
+const queue = async.queue((task, completed) => {
+    console.log("Currently Busy Processing Task " + task);
+
+    // Simulating a Complex task
+    setTimeout(() => {
+        // The number of tasks to be processed
+        const remaining = queue.length();
+        completed(null, { task, remaining });
+    }, 2000);
+}, 1); // The concurrency value is 1
+
 // pass socket.io const to socket/matchmaking.js
-require("./socket/matchmaking")(io, Player, _);
+require("./socket/matchmaking")(io, Player, _, queue);
 
 // route for authentication (middleware)
 const auth = require("./routes/authRoutes");
