@@ -28,25 +28,6 @@ const server = require("http").createServer(app);
 // const io = require("socket.io")(server).listen(server);
 const io = require("socket.io")(server);
 
-// connect frontend to backend
-// app.use((req, res, next) => {
-//     res.header("Access-Control-Allow-Original", "*");
-//     res.header("Access-Control-Allow-Credentials", "true");
-//     res.header(
-//         "Access-Control-Allow-Methods",
-//         "GET",
-//         "POST",
-//         "DELETE",
-//         "PUT",
-//         "OPTIONS"
-//     );
-//     res.header(
-//         "Access-Control-Allow-Headers",
-//         "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-//     );
-//     next();
-// });
-
 // express middleware that passes url encoded data
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
@@ -70,10 +51,10 @@ require("./socket/streams")(io, User, _);
 // pass socket.io const to socket/private.js
 require("./socket/private")(io);
 
-const Semaphore = require("semaphore-async-await").Lock;
-const lock = new Semaphore(1);
+// const Semaphore = require("semaphore-async-await").Lock;
+// const lock = new Semaphore(1);
 // pass socket.io const to socket/matchmaking.js
-require("./socket/matchmaking")(io, Player, _, lock);
+require("./socket/matchmaking")(io, Player, _);
 
 // route for authentication (middleware)
 const auth = require("./routes/authRoutes");
