@@ -22,6 +22,7 @@ export class RandomgameComponent implements OnInit {
   user: any;
   recieverData: any;
   yOffset = 10;
+  buttonClicked = false;
 
   constructor(
     private tokenService: TokenService,
@@ -46,6 +47,7 @@ export class RandomgameComponent implements OnInit {
       console.log(twoPlayers)
       // check if connected user is searching matched
       if (twoPlayers.includes(this.nickname)) {
+        this.buttonClicked = false;
         // filter out the other player
         const otherPlayer = twoPlayers.filter((e: any) => { return e !== this.nickname })
         // different redirects depending on enviroment
@@ -59,11 +61,17 @@ export class RandomgameComponent implements OnInit {
   }
 
   readyToPlay() {
-    const params = {
-      room: 'global', 
-      nickname: this.nickname
+    if (this.buttonClicked === false) {
+      this.buttonClicked = true;
+      const params = {
+        room: 'global',
+        nickname: this.nickname
+      };
+      this.socket.emit('ready_to_play', params);
     }
-    this.socket.emit('ready_to_play', params)
+    else {
+      console.log("button clicked already");
+    }
   }
 
   GetUserByNickname(name:any) {
