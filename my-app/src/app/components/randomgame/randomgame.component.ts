@@ -37,9 +37,9 @@ export class RandomgameComponent implements OnInit {
     this.user = this.tokenService.GetPayload();
     this.nickname = this.user.nickname;
 
-    this.socket.on("playersReadyToPlay", (list: any) => {
-      // console.log(list)
-    })
+    // this.socket.on("playersReadyToPlay", (list: any) => {
+    //   // console.log(list)
+    // })
 
     // check the use of rooms - like in typing indicator
     this.socket.on("matchmaking", (twoPlayers: any) => {

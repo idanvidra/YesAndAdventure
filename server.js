@@ -56,16 +56,19 @@ const async = require("async");
 const queue = async.queue((task, completed) => {
     console.log("Currently Busy Processing Task " + task);
 
-    // const remaining = queue.length();
-    // completed(null, { task, remaining });
+    const remaining = queue.length();
+    completed(null, { task, remaining });
 
     // Simulating a Complex task
-    setTimeout(() => {
-        // The number of tasks to be processed
-        const remaining = queue.length();
-        completed(null, { task, remaining });
-    }, 1);
+    // setTimeout(() => {
+    //     // The number of tasks to be processed
+    //     const remaining = queue.length();
+    //     completed(null, { task, remaining });
+    // }, 1);
 }, 1); // The concurrency value is 1
+queue.drain(function () {
+    console.log("all items have been processed");
+});
 
 // pass socket.io const to socket/matchmaking.js
 require("./socket/matchmaking")(io, Player, _, queue);

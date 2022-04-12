@@ -53,7 +53,7 @@ module.exports = function (io, Player, _, queue) {
                     // get list of nicknames of all ready to play players
                     const list = playerData.GetList(params.room);
                     // emit the ready event
-                    io.emit("playersReadyToPlay", _.uniq(list));
+                    // io.emit("playersReadyToPlay", _.uniq(list));
                     // check if there is more then one player ready
                     if (_.uniq(list).length > 1) {
                         const firstTwoPlayersInQueue = _.uniq(list).slice(0, 2);
