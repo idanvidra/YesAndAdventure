@@ -41,9 +41,6 @@ module.exports = function (io, Player, _, queue) {
                         `An error occurred while processing task ${task}`
                     );
                 } else {
-                    console.log(
-                        `Finished processing task ${task}. ${remaining} tasks remaining`
-                    );
                     socket.join(params.room);
                     playerData.EnterRoom(
                         socket.id,
@@ -66,11 +63,15 @@ module.exports = function (io, Player, _, queue) {
                             firstTwoPlayersInQueue[0]
                         );
                         const player_2 = playerData.RemoveUserByNickname(
-                            firstTwoPlayersInQueue[0]
+                            firstTwoPlayersInQueue[1]
                         );
                         // console.log("two players 1");
                         io.emit("matchmaking", firstTwoPlayersInQueue);
                     }
+
+                    console.log(
+                        `Finished processing task ${task}. ${remaining} tasks remaining`
+                    );
                 }
             });
         });
