@@ -6,7 +6,7 @@ module.exports = function (io, User, _) {
     // connection event is a global event
     io.on("connection", (socket) => {
         socket.on("refresh", (data) => {
-            io.emit("refreshPage", {});
+            io.emit("refreshPage", { data });
         });
 
         // listen to user online event

@@ -53,8 +53,10 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges{
 
       // listens to emitions of refreshPage and runs GetUserByNickname
       // this will run GetMessages
-      this.socket.on('refreshPage', () => {
-        this.GetUserByNickname(this.reciever);
+      this.socket.on('refreshPage', (data: any) => {
+        if (data.data.to == this.user.nickname || data.data.from == this.user.nickname) { // only update messages that are meant for you
+          this.GetUserByNickname(this.reciever);
+        }
       })
     })
 
@@ -132,6 +134,22 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges{
     }
   }
 
+  // SendMessage() {
+
+  //   this.message = this.removeExtraNewLine(this.message);
+
+  //   if (this.message) { // no messages if empty
+
+  //     this.messageService
+  //     .SendMessage(this.user._id, this.recieverData._id, this.recieverData.nickname, this.message)
+  //       .subscribe(data => {
+
+  //       this.message = "" // make field empty after sending
+  //       this.socket.emit('refresh', {}) // emit refresh event when message is sent
+  //     })
+  //   }
+  // }
+
   SendMessage() {
 
     this.message = this.removeExtraNewLine(this.message);
@@ -142,8 +160,12 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges{
       .SendMessage(this.user._id, this.recieverData._id, this.recieverData.nickname, this.message)
         .subscribe(data => {
 
-        this.message = "" // make field empty after sending
-        this.socket.emit('refresh', {}) // emit refresh event when message is sent
+          this.message = ""; // make field empty after sending
+        // this.socket.emit('refresh', {}) // emit refresh event when message is sent
+          this.socket.emit('refresh', {
+            to: this.reciever,
+            from: this.user.nickname
+          })
       })
     }
   }
