@@ -55,7 +55,8 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges{
       // this will run GetMessages
       this.socket.on('refreshPage', (data: any) => {
         if (data.data.to == this.user.nickname || data.data.from == this.user.nickname) { // only update messages that are meant for you
-          this.GetUserByNickname(this.reciever);
+          // this.GetUserByNickname(this.reciever);
+          this.GetMessages(this.user._id, this.recieverData._id)
         }
       })
     })
