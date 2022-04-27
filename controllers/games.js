@@ -67,7 +67,6 @@ module.exports = {
                 .status(httpStatus.StatusCodes.OK)
                 .json({ message: "All games retrieved", games });
         } catch (err) {
-            // console.log(err);
             return res
                 .status(httpStatus.StatusCodes.INTERNAL_SERVER_ERROR)
                 .json({ message: "Failed to retrieve all games", err });

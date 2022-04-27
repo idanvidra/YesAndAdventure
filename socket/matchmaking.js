@@ -20,10 +20,6 @@ module.exports = function (io, Player, _, queue) {
             // // check if there is more then one player ready
             // if (_.uniq(list).length > 1) {
             //     const firstTwoPlayersInQueue = _.uniq(list).slice(0, 2);
-            //     console.log(
-            //         firstTwoPlayersInQueue[0],
-            //         firstTwoPlayersInQueue[1]
-            //     );
             //     // remove the matched players
             //     const player_1 = playerData.RemoveUserByNickname(
             //         firstTwoPlayersInQueue[0]
@@ -31,7 +27,6 @@ module.exports = function (io, Player, _, queue) {
             //     const player_2 = playerData.RemoveUserByNickname(
             //         firstTwoPlayersInQueue[0]
             //     );
-            //     // console.log("two players 1");
             //     io.emit("matchmaking", firstTwoPlayersInQueue);
             // }
 
@@ -54,10 +49,6 @@ module.exports = function (io, Player, _, queue) {
                     // check if there is more then one player ready
                     if (_.uniq(list).length > 1) {
                         const firstTwoPlayersInQueue = _.uniq(list).slice(0, 2);
-                        console.log(
-                            firstTwoPlayersInQueue[0],
-                            firstTwoPlayersInQueue[1]
-                        );
                         // remove the matched players
                         const player_1 = playerData.RemoveUserByNickname(
                             firstTwoPlayersInQueue[0]
@@ -65,13 +56,12 @@ module.exports = function (io, Player, _, queue) {
                         const player_2 = playerData.RemoveUserByNickname(
                             firstTwoPlayersInQueue[1]
                         );
-                        // console.log("two players 1");
                         io.emit("matchmaking", firstTwoPlayersInQueue);
                     }
 
-                    console.log(
-                        `Finished processing task ${task}. ${remaining} tasks remaining`
-                    );
+                    // console.log(
+                    //     `Finished processing task ${task}. ${remaining} tasks remaining`
+                    // );
                 }
             });
         });

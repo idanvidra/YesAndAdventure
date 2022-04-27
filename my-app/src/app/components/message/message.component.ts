@@ -6,7 +6,6 @@ import { UsersService } from 'src/app/services/users.service';
 import io from 'socket.io-client';
 import { environment } from 'src/environments/environment';
 import * as _ from 'lodash';
-// import { HelperService } from 'src/app/services/helper.service';
 
 const BASESOCKET = environment.socket;
 
@@ -40,7 +39,6 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges{
     private messageService: MessageService,
     private route: ActivatedRoute,
     private usersService: UsersService,
-    // private helperService: HelperService
   ) {
     this.socketHost = BASESOCKET;
     this.socket = io(this.socketHost, {transports: ['websocket']});
@@ -75,19 +73,6 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges{
       }
     })
   }
-
-  // check for user leaving page
-
-  // add OnDestroy 
-  // saveDraft():Promise<string> {
-  //   //Return a promise so that ngOnDestroy will wait for it to finish
-  //   return "true"
-  // }
-
-  // @HostListener('window:beforeunload') //<-- Do NOT put a semicolon here
-  // async ngOnDestroy() {
-  //   await this.saveDraft();
-  // }
 
   // detect changes that are made in the component
   // returens the values
@@ -137,7 +122,19 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges{
     })
   }
 
+  // remove new lines from message
+  // used so that users don't send empty messages
+  removeExtraNewLine(message: any) {
+    if (message) { 
+      return message.trim();
+    } else {
+      return message
+    }
+  }
+
   SendMessage() {
+
+    this.message = this.removeExtraNewLine(this.message);
 
     if (this.message) { // no messages if empty
 
