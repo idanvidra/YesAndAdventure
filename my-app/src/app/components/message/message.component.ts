@@ -54,7 +54,8 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges{
       // listens to emitions of refreshPage and runs GetUserByNickname
       // this will run GetMessages
       this.socket.on('refreshPage', (data: any) => {
-        if (data.data.to == this.user.nickname || data.data.from == this.user.nickname) { // only update messages that are meant for you
+        // if (data.data.to == this.user.nickname || data.data.from == this.user.nickname) { // only update messages that are meant for you or from you
+        if((data.data.to == this.user.nickname && data.data.from == this.reciever) || (data.data.to == this.reciever && data.data.from == this.user.nickname)) {
           // this.GetUserByNickname(this.reciever);
           this.GetMessages(this.user._id, this.recieverData._id)
         }
@@ -155,7 +156,7 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges{
 
     this.message = this.removeExtraNewLine(this.message);
 
-    if (this.message) { // no messages if empty
+    if (this.message) { // check if message is empty
 
       this.messageService
       .SendMessage(this.user._id, this.recieverData._id, this.recieverData.nickname, this.message)
