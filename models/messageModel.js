@@ -21,7 +21,9 @@ const MessageSchema = mongoose.Schema({
             recieverName: { type: String },
             body: { type: String, default: "" },
             isRead: { type: Boolean, default: false },
-            createdAt: { type: Date, default: Date.now() },
+            createdAt: { type: Date, default: new Date().toLocaleString() },
+            timeStamp: { type: Date },
+            // createdAt: { type: Date, default: Date.now() },
         },
     ],
 });

@@ -78,6 +78,7 @@ module.exports = {
                                     senderName: req.user.nickname,
                                     recieverName: req.body.receiverName,
                                     body: req.body.message,
+                                    timeStamp: new Date().toLocaleString(),
                                 },
                             },
                         }
@@ -115,6 +116,7 @@ module.exports = {
                         senderName: req.user.nickname,
                         recieverName: req.body.receiverName,
                         body: req.body.message,
+                        timeStamp: new Date().toLocaleString(),
                     });
 
                     // update chat list array
